@@ -1,0 +1,4 @@
+---
+new_relic:
+  license_key: false
+  appname: false

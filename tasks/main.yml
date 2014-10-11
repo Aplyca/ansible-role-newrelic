@@ -1,0 +1,12 @@
+---
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- debug: msg="New Relic will not be started, you need to define a valid New Relic license key in the newrelic_license_key variable"
+  when: not new_relic['license_key']
+
+- include: post-setup.yml
+  when: new_relic['license_key']
