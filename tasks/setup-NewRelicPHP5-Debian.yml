@@ -11,7 +11,9 @@
 
 - name: Removing New Relic redundant config in PHP conf
   sudo: yes
-  command: rm -f /etc/php5/apache2/conf.d/newrelic.ini
+  file:
+    path: /etc/php5/apache2/conf.d/newrelic.ini
+    state: absent
 
 - name: Adding NewRelic license key to PHP conf
   sudo: yes

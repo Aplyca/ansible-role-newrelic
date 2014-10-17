@@ -23,9 +23,7 @@
   command: php --version
   register: php_present
   ignore_errors: True
-
-- debug: msg="New Relic for PHP will not be isntallaed because PHP is not present"
-  when: php_present|failed
+  changed_when: False
 
 - name: Install New Relic for PHP with apt
   sudo: yes
