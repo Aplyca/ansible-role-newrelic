@@ -1,0 +1,3 @@
+---
+newrelic:
+  php_conf_dir: /etc/php.d
