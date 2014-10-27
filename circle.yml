@@ -1,7 +1,7 @@
 dependencies:
   pre:
-    - pip install paramiko PyYAML jinja2 httplib2
-    - pip install ansible
+    - sudo pip install paramiko PyYAML jinja2 httplib2
+    - sudo pip install ansible
 
 machine:
   environment:
