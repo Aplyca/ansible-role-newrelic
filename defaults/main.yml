@@ -1,4 +1,4 @@
 ---
 newrelic:
-  license_key: false
+  license_key: "ThisIsAFakeLicenceKeyPleaseChange40chars"
   appname: "New Relic PHP App"
