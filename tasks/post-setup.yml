@@ -1,9 +1,17 @@
 ---
-- name: "Add New Relic license key {{ new_relic['license_key'] }}"
-  sudo: yes
-  command: nrsysmond-config --set license_key="{{ new_relic['license_key'] }}"
-  notify:
-    - restart new_relic
+- command: php --version
+  register: php_present
+  ignore_errors: True
+  changed_when: False
 
-- include: setup-NewRelicPHP5-Debian.yml
+- name: "Add New Relic license key"
+  sudo: yes
+  command: nrsysmond-config --set license_key="{{ newrelic['license_key'] }}"
+  notify:
+    - restart newrelic
+
+- include: setup-PHP-Debian.yml
   when: ansible_os_family == 'Debian' and php_present|success
+
+- include: setup-PHP-RedHat.yml
+  when: ansible_os_family == 'RedHat' and php_present|success

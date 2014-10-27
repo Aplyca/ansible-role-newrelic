@@ -18,17 +18,3 @@
     name: newrelic-sysmond
     state: present
     force: yes
-
-- name: Validating if PHP is present
-  command: php --version
-  register: php_present
-  ignore_errors: True
-  changed_when: False
-
-- name: Install New Relic for PHP with apt
-  sudo: yes
-  apt:
-    name: newrelic-php5
-    state: present
-    force: yes
-  when: php_present|success

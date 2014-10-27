@@ -1,4 +1,4 @@
 ---
-new_relic:
+newrelic:
   license_key: false
-  appname: false
+  appname: "New Relic PHP App"

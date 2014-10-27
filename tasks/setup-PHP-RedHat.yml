@@ -1,0 +1,43 @@
+---
+- name: Add the New Relic PHP package repo to yum
+  sudo: yes
+  yum:
+    name: http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
+    state: present
+
+- name: Install New Relic PHP with yum
+  sudo: yes
+  yum:
+    name: newrelic-php5
+    state: present
+
+- stat:
+    path: /etc/php5/cli/conf.d/newrelic.ini
+    get_md5: no
+  register: new_relic_php5_ini
+
+- name: Adding New Relic module config to PHP conf
+  sudo: yes
+  command: mv /etc/php5/cli/conf.d/newrelic.ini /etc/php5/mods-available/newrelic.ini
+  when: new_relic_php5_ini.stat.exists
+
+- name: Removing New Relic redundant config in PHP conf
+  sudo: yes
+  file:
+    path: /etc/php5/apache2/conf.d/newrelic.ini
+    state: absent
+
+- name: Adding NewRelic license key to PHP conf
+  sudo: yes
+  lineinfile: dest=/etc/php5/mods-available/newrelic.ini regexp='^newrelic.license = ' line='newrelic.license = "{{ newrelic['license_key'] }}"'
+
+- name: Adding NewRelic App name to PHP conf
+  sudo: yes
+  lineinfile: dest=/etc/php5/mods-available/newrelic.ini regexp='^;?newrelic.appname = ' line='newrelic.appname = "{{ newrelic['appname'] }}"'
+  when: newrelic['appname']
+
+- name: Enabling NewRelic module config in PHP conf
+  sudo: yes
+  command: php5enmod newrelic
+  notify: reload apache
+  when: apache['service']

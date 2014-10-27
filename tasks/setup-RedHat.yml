@@ -1,40 +1,12 @@
 ---
-- name: Add the New Relic package repo to apt
-  sudo: yes
-  apt_repository:
-    repo: 'deb http://apt.newrelic.com/debian/ newrelic non-free'
-    state: present
-
-
 - name: Add the New Relic package repo to yum
   sudo: yes
-  yum: name=http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm state=present
-  when: ansible_os_family == 'RedHat'
-
-- name: Add an Apt signing key for New relic repo
-  sudo: yes
-  apt_key: id=548C16BF url=https://download.newrelic.com/548C16BF.gpg state=present
-  when: ansible_os_family == 'Debian'
+  yum:
+    name: http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm
+    state: present
 
 - name: Install New Relic with yum
   sudo: yes
-  yum: name=newrelic-sysmond state=present
-  when: ansible_os_family == 'RedHat'
-
-- name: Install New Relic with apt
-  sudo: yes
-  apt: name=newrelic-sysmond state=present force=yes
-  when: ansible_os_family == 'Debian'
-
-- command: php --version
-  register: php_present
-  ignore_errors: True
-
-- name: "Validating PHP present"
-  debug: msg="New Relic for PHP will not be isntallaed because PHP is not present"
-  when: php_present|failed
-
-- name: Install New Relic for PHP with apt
-  sudo: yes
-  apt: name=newrelic-php5 state=present force=yes
-  when: ansible_os_family == 'Debian' and  php_present|success
+  yum:
+    name: newrelic-sysmond
+    state: present
