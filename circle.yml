@@ -1,0 +1,24 @@
+dependencies:
+  pre:
+    - pip install paramiko PyYAML jinja2 httplib2
+    - pip install ansible
+
+machine:
+  environment:
+    PLAYBOOK: playbook.yml
+  pre:
+    - uname -a
+    - cat /proc/version
+    - ln -s ansible-role-newrelic ../mauricios.NewRelic
+    - ansible --version
+    - cd tests
+
+test:
+  override:
+    - ansible-playbook $PLAYBOOK --extra --syntax-check
+    - ansible-playbook $PLAYBOOK --connection=local
+    - >
+    ansible-playbook $PLAYBOOK --connection=local
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
