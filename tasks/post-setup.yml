@@ -4,11 +4,15 @@
   ignore_errors: True
   changed_when: False
 
-- name: "Add New Relic license key"
+- name: Add New Relic license key
   sudo: yes
-  command: nrsysmond-config --set license_key="{{ newrelic['license_key'] }}"
-  notify:
-    - restart newrelic
+  lineinfile:
+    dest: "{{ newrelic['install_dir'] }}/nrsysmond.cfg"
+    regexp: "^license_key="
+    line: "license_key={{ newrelic['license_key'] }}"
+    state: present
+    backrefs: yes
+  notify: restart newrelic
 
 - include: setup-PHP-Debian.yml
   when: ansible_os_family == 'Debian' and php_present|success
