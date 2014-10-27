@@ -9,7 +9,7 @@ machine:
   pre:
     - uname -a
     - cat /proc/version
-    - ln -s ansible-role-newrelic ../mauricios.NewRelic
+    - sudo ln -s ansible-role-newrelic ../mauricios.NewRelic
     - ansible --version
     - cd tests
 
