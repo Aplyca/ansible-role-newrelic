@@ -9,11 +9,12 @@ machine:
   pre:
     - uname -a
     - cat /proc/version
+
+test:
+  pre:
     - sudo ln -s ansible-role-newrelic ../mauricios.NewRelic
     - ansible --version
     - cd tests
-
-test:
   override:
     - ansible-playbook $PLAYBOOK --extra --syntax-check
     - ansible-playbook $PLAYBOOK --connection=local
