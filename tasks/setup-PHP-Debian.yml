@@ -27,6 +27,7 @@
   sudo: yes
   command: php5enmod newrelic
   notify: reload apache
+  changed_when: False
   when: apache['service']
 
 - include: setup-PHP.yml
