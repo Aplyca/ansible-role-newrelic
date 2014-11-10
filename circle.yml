@@ -9,14 +9,10 @@ dependencies:
 machine:
   environment:
     PLAYBOOK: playbook.yml
-  pre:
-    - uname -a
-    - cat /proc/version
 
 test:
   pre:
     - sudo ln -s ansible-role-newrelic ../../mauricios.NewRelic
-    - ansible --version
   override:
     - ansible-playbook $PLAYBOOK --syntax-check
     - ansible-playbook $PLAYBOOK --connection=local
