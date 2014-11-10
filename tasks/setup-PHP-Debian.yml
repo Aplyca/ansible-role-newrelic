@@ -7,16 +7,6 @@
     force: yes
   when: php_present|success
 
-- stat:
-    path: /etc/php5/cli/conf.d/newrelic.ini
-    get_md5: no
-  register: new_relic_php5_ini
-
-- name: Adding New Relic module config to PHP conf
-  sudo: yes
-  command: "cp -f /etc/php5/cli/conf.d/newrelic.ini {{ newrelic_php_conf_dir }}/newrelic.ini"
-  when: new_relic_php5_ini.stat.exists
-
 - name: Removing New Relic redundant config in PHP conf
   sudo: yes
   file:
@@ -28,6 +18,6 @@
   command: php5enmod newrelic
   notify: reload apache
   changed_when: False
-  when: apache['service']
+  when: apache['service'] is defined
 
 - include: setup-PHP.yml
