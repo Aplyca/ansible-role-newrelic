@@ -14,7 +14,7 @@
 
 - name: Adding New Relic module config to PHP conf
   sudo: yes
-  command: mv /etc/php5/cli/conf.d/newrelic.ini /etc/php5/mods-available/newrelic.ini
+  command: "mv /etc/php5/cli/conf.d/newrelic.ini {{ newrelic_php_conf_dir }}/newrelic.ini"
   when: new_relic_php5_ini.stat.exists
 
 - name: Removing New Relic redundant config in PHP conf
