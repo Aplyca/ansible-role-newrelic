@@ -1,2 +1,2 @@
 ---
-newrelic_php_conf_dir:: /etc/php5/cli/conf.d
+newrelic_php_conf_dir: /etc/php5/cli/conf.d
