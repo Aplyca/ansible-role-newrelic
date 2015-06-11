@@ -12,7 +12,7 @@ machine:
 
 test:
   pre:
-    - sudo ln -s ansible-role-newrelic ../../mauricios.NewRelic
+    - sudo ln -s ansible-role-newrelic ../../aplyca.NewRelic
   override:
     - ansible-playbook $PLAYBOOK --syntax-check
     - ansible-playbook $PLAYBOOK --connection=local

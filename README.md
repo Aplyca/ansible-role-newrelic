@@ -1,6 +1,7 @@
 # Ansible Role: New Relic
 
 [![Build Status](https://travis-ci.org/Aplyca/ansible-role-newrelic.svg?branch=master)](https://travis-ci.org/Aplyca/ansible-role-newrelic)
+[![Circle CI](https://circleci.com/gh/Aplyca/ansible-role-newrelic.png?style=badge)](https://circleci.com/gh/Aplyca/ansible-role-newrelic)
 
 Ansible Role that installs and configure New Relic on Debian/Ubuntu.
 

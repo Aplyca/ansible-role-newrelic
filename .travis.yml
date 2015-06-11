@@ -14,7 +14,7 @@ install:
   - sudo pip install ansible
 
 before_script:
-  - ln -s ansible-role-newrelic ../mauricios.NewRelic
+  - ln -s ansible-role-newrelic ../aplyca.NewRelic
 
 script:
   - "cd tests"
