@@ -7,12 +7,6 @@
     force: yes
   when: php_present|success
 
-- name: Removing New Relic redundant config in PHP conf
-  sudo: yes
-  file:
-    path: /etc/php5/apache2/conf.d/newrelic.ini
-    state: absent
-
 - name: Enabling NewRelic module config in PHP conf
   sudo: yes
   command: php5enmod newrelic
