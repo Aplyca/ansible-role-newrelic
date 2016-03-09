@@ -5,11 +5,11 @@
   changed_when: False
 
 - name: Add New Relic license key
-  sudo: yes
+  become: yes
   lineinfile:
-    dest: "{{ newrelic['install_dir'] }}/nrsysmond.cfg"
+    dest: "{{ newrelic.install_dir }}/nrsysmond.cfg"
     regexp: "^license_key="
-    line: "license_key={{ newrelic['license_key'] }}"
+    line: "license_key={{ newrelic.license_key }}"
     state: present
     backrefs: yes
   notify: restart newrelic

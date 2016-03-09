@@ -13,4 +13,4 @@
   when: ansible_os_family == 'Debian'
 
 - include: post-setup.yml
-  when: newrelic['license_key']
+  when: newrelic.license_key

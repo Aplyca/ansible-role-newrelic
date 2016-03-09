@@ -1,6 +1,6 @@
 ---
 - name: Install New Relic for PHP with apt
-  sudo: yes
+  become: yes
   apt:
     name: newrelic-php5
     state: present
@@ -8,7 +8,7 @@
   when: php_present|success
 
 - name: Enabling NewRelic module config in PHP conf
-  sudo: yes
+  become: yes
   command: php5enmod newrelic
   notify: reload apache
   changed_when: False
