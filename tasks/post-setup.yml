@@ -6,12 +6,7 @@
 
 - name: Add New Relic license key
   become: yes
-  lineinfile:
-    dest: "{{ newrelic.install_dir }}/nrsysmond.cfg"
-    regexp: "^license_key="
-    line: "license_key={{ newrelic.license_key }}"
-    state: present
-    backrefs: yes
+  shell: "nrsysmond-config --set license_key={{ newrelic.license_key }}"
   notify: restart newrelic
 
 - include: setup-PHP-Debian.yml

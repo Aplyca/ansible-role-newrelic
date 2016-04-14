@@ -1,13 +1,13 @@
 ---
 - name: restart newrelic
-  sudo: yes
+  become: yes
   service:
     name: newrelic-sysmond
     state: restarted
     enabled: yes
 
 - name: restart newrelic-sysmond
-  sudo: yes
+  become: yes
   service:
     name: newrelic-sysmond
     state: restarted
