@@ -12,6 +12,6 @@
   command: php5enmod newrelic
   notify: reload apache
   changed_when: False
-  when: apache['service'] is defined
+  when: apache.service is defined
 
 - include: setup-PHP.yml

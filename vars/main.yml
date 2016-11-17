@@ -1,3 +1,4 @@
 ---
 newrelic:
   install_dir: /etc/newrelic
+  php_conf_dir: /etc/php/5.6/mods-available
