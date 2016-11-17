@@ -9,7 +9,7 @@
 
 - name: Enabling NewRelic module config in PHP conf
   become: yes
-  command: php5enmod newrelic
+  command: phpenmod newrelic
   notify: reload apache
   changed_when: False
   when: apache.service is defined
