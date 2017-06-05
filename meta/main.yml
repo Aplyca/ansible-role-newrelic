@@ -1,4 +1,6 @@
 ---
+dependencies: []
+
 galaxy_info:
   author: Aplyca
   description: NewRelic Debian/Ubuntu/RedHat/CentOS.
