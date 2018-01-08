@@ -11,4 +11,4 @@
     name: newrelic-php5
     state: present
 
-- include: setup-PHP.yml
+- include_tasks: setup-PHP.yml

@@ -14,4 +14,4 @@
   changed_when: False
   when: apache.service is defined
 
-- include: setup-PHP.yml
+- include_tasks: setup-PHP.yml

@@ -20,8 +20,8 @@
     create: yes
   no_log: True
 
-- include: setup-PHP-Debian.yml
+- include_tasks: setup-PHP-Debian.yml
   when: ansible_os_family == 'Debian' and php_present|success
 
-- include: setup-PHP-RedHat.yml
+- include_tasks: setup-PHP-RedHat.yml
   when: ansible_os_family == 'RedHat' and php_present|success
