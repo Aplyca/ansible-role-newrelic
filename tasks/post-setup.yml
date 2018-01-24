@@ -19,6 +19,8 @@
     line: "license_key: {{ newrelic.license_key }}"
     create: yes
   no_log: True
+  when:
+    newrelic.install_newrelic_infra == True
 
 - include_tasks: setup-PHP-Debian.yml
   when: ansible_os_family == 'Debian' and php_present|success
