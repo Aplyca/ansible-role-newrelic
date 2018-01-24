@@ -5,7 +5,7 @@
     name: http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm
     state: present
 
-- name: Install New Relic with yum
+- name: Install NewRelic Sysmond with yum
   become: yes
   yum:
     name: newrelic-sysmond

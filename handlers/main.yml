@@ -12,3 +12,11 @@
     name: newrelic-infra
     state: restarted
     enabled: yes
+  when: newrelic.install_newrelic_infra == True
+
+- name: restart php-fpm
+  become: yes
+  service:
+    name: php-fpm
+    state: restarted
+    enabled: yes

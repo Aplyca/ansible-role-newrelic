@@ -9,3 +9,6 @@
     appname: "{{ newrelic.appname }}"
     license: "{{ newrelic.license_key }}"
   no_log: True
+  notify:
+    - restart php-fpm
+  when: php_present|success

@@ -20,12 +20,18 @@
     - path: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
       id: ""
 
-- name: Install NewRelic with apt
+- name: Install NewRelic Sysmond with apt
   become: yes
   apt:
-    name: "{{ item }}"
+    name: newrelic-sysmond
     state: present
     force: yes
-  with_items:
-    - "newrelic-sysmond"
-    - "newrelic-infra"
+
+- name: Install NewRelic Infra with apt
+  become: yes
+  apt:
+    name: newrelic-infra
+    state: present
+    force: yes
+  when:
+    newrelic.install_newrelic_infra == True
