@@ -8,5 +8,13 @@
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: post-setup.yml
-  when: newrelic.license_key
+- command: php --version
+  register: php_present
+  ignore_errors: True
+  changed_when: False
+
+- include_tasks: setup-PHP-Debian.yml
+  when: ansible_os_family == 'Debian' and php_present
+
+- include_tasks: setup-PHP-RedHat.yml
+  when: ansible_os_family == 'RedHat' and php_present

@@ -1,11 +1,25 @@
 ---
+- name: Preseed license key and app name
+  become: yes
+  debconf:
+      name: newrelic-php5
+      question: newrelic-php5/{{ item.name }}
+      value: "{{ item.value }}"
+      vtype: string
+  with_items:
+      - name: application-name
+        value: "{{ newrelic.appname }}"
+      - name: license-key
+        value: "{{ newrelic.license_key }}"
+
 - name: Install New Relic for PHP with apt
   become: yes
   apt:
-    name: newrelic-php5
-    state: present
-    force: yes
-  when: php_present|success
+      name: newrelic-php5
+      state: present
+      update_cache: yes
+      force: yes
+  when: php_present is success
 
 - name: Enabling NewRelic module config in PHP conf
   become: yes
@@ -13,5 +27,3 @@
   notify: reload apache
   changed_when: False
   when: apache.service is defined
-
-- include_tasks: setup-PHP.yml
